@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+        }
+        .wrapper{
+            height: 400px;
+            width: 300px;
+            border: 1px solid black;
+            margin:80px auto;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .redBox{
+            height: 40px;
+            width: 30px;
+            background-color: red;
+            position: absolute;
+            text-align:center;
+            line-height: 40px;
+            font-size: 10px;
+            z-index:999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper"></div>
+    <script src="./jquery.js"></script>
+    <script>
+        //生成红包
+        setInterval(function(){
+            var oDiv=$("<div class='redBox'></div>");
+            var rotateNum=parseInt(Math.random()*40-20);
+            oDiv.css({
+                "top":parseInt(-Math.random()*80),
+                "left":parseInt(Math.random()*240),
+                "transform": "rotate(" + rotateNum + "deg)"
+            }).text((Math.random()*10).toFixed(1)+"¥").appendTo($(".wrapper"))
+            down(oDiv);  //红包下落
+        },Math.random()*500)
+
+        function down(div){
+            div.animate({top:"450px"},4000,function(){
+                if(parseInt(div.css("top")) >= 400){  //将字符串类型转化为数字类型
+                    $(this).remove()
+                }
+            })
+        }
+        //返回一个任意区间的随机数
+        function getMath(min,max){
+            return Math.random() * (max-min) + min ; 
+        }    
+        
+        
+    </script>
+    
+</body>
+</html>
